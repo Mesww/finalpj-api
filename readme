@@ -1,0 +1,2 @@
+# this comand to build docker 
+    docker compose --env-file ./Server-api-temp/.env up --build -d
