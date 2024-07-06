@@ -10,6 +10,7 @@
     "build": "tsc -p ."
   },
   "dependencies": {
+    "@types/ws": "^8.5.10",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
@@ -22,7 +23,8 @@
     "mongoose": "^8.4.1",
     "nodemon": "^3.0.3",
     "typescript": "^5.3.3",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
