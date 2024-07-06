@@ -1,25 +1,25 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const userSchema = mongoose.Schema({
-    studentid:{
-        required:true,
-        type:String,
-    },
-    email:{
-        required:true,
-        type: String,
-        trim: true,
-        validate:{
-           validator: (value: any)=>{
-            const re =
-            /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-          return value.match(re);
-        },
-        message: "Please enter a valid email address",}
-    },password: {
-        required: true,
-        type: String,
+const userSchema = new mongoose.Schema({
+  email: {
+    required: true,
+    type: String,
+    trim: true,
+    validate: {
+      validator: (value: string) => {
+        const re =
+          /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        return re.test(value);
       },
+      message: "Please enter a valid email address"
+    }
+  },
+  name: {
+    required: true,
+    type: String,
+  }
 });
+
 const User = mongoose.model("User", userSchema);
-module.exports = User;
+
+export default User;
