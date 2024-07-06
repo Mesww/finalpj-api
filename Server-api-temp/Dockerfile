@@ -1,5 +1,5 @@
 # Use a lightweight Node.js image
-FROM node:20-alpine
+FROM node:18.0.0
 
 # Set working directory
 WORKDIR /app
@@ -8,13 +8,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the entire project
 COPY . .
 
 # Build TypeScript
-RUN yarn run build
+RUN npm run build
 
 # Expose port 8886
 EXPOSE 8886
