@@ -7,13 +7,26 @@ import { logger } from './middle/log';
 import http from 'http';
 import WebSocket from 'ws';
 import axios from 'axios';
-
+import cors from 'cors'; 
 dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+const FONTENDURL = process.env.FONTENDURL || "http://localhost:5173";
+console.log("Fontendurl : "+FONTENDURL);
+// Configure CORS to allow requests from your frontend origin
+app.use(cors({
+  origin: FONTENDURL,
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+   // Allow cookies to be sent
+}));
+
 const mongoDBUrl = process.env.MONGODB_URL;
 console.log(mongoDBUrl);
+
+
 
 if (!mongoDBUrl) {
   throw new Error("MONGODB_URL environment variable is not set!");
@@ -77,3 +90,4 @@ wss.on('connection', (ws: WebSocket) => {
 server.listen(PORT, () => {
   console.log(`Server is rocking at ${PORT}`);
 });
+

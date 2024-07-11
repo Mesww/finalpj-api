@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+export interface interface_User  {
+  email:string,
+  name:string,
+  role:string
+} 
+
 const userSchema = new mongoose.Schema({
   email: {
     required: true,
@@ -17,6 +23,16 @@ const userSchema = new mongoose.Schema({
   name: {
     required: true,
     type: String,
+  },
+  role:{
+    required:true,
+    type:String,
+    validate: {
+      validator: function(value: string) {
+          return /^[A-Z]+$/.test(value);
+      },
+      message: (props: { value: any; }) => `${props.value} is not a valid Role name. Only capital letters are allowed.`,
+  },
   }
 });
 
