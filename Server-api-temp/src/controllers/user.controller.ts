@@ -18,6 +18,7 @@ export const userRolecontroller = async function (req: Request, res: Response) {
   if (!user) {
     return res.status(500).send(null);
   }
+  
   const token_userinfo = jwt.sign({"email":user.email,"name":user.name,"role":user.role}, key);
   return res.status(200).send(token_userinfo);
 };

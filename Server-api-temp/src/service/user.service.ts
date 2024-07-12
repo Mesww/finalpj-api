@@ -5,7 +5,7 @@ import RoleModel from '../models/roles.model'; // Adjust the path as per your fi
 export const regis_user = async (payload:interface_User)=>{
 
     try {
-        const key = process.env.FONTENDURL || "kimandfamily";
+        const key = process.env.TOKEN_KEY || "kimandfamily";
         // find user in database
         const user = await User.findOne({ email: payload.email });
         console.log("User found:", user);
@@ -13,6 +13,7 @@ export const regis_user = async (payload:interface_User)=>{
         let token = "";
         // add role
         const roleindatabase = await addRole(payload.role);
+
         // console.log(roleindatabase.Role);
         if (!user) {
           // creat user
@@ -27,6 +28,10 @@ export const regis_user = async (payload:interface_User)=>{
           return token;
         }
     
+        if (user.role === undefined || user.role === null ) {
+            user.updateOne({role:payload.role});
+        }
+
          token = jwt.sign({ id: user._id }, key);
 
          return token;
@@ -69,7 +74,7 @@ export const findRoleByName = async (roleName: any) => {
 
 export const findUserById = async (objectId:string)=>{
     try {
-        const key = process.env.FONTENDURL || "kimandfamily";
+        const key = process.env.TOKEN_KEY || "kimandfamily";
         const user = await User.findById(objectId);
         
         return user

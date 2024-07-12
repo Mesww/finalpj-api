@@ -8,7 +8,7 @@ export const auth_middleware = async (
   next: () => void
 ) => {
   try {
-    const key = process.env.FONTENDURL || "kimandfamily";
+    const key = process.env.TOKEN_KEY || "kimandfamily";
     const token = req.header("x-auth-token");
     if (!token)
       return res.status(401).json({ msg: "No auth token, access denied" });
