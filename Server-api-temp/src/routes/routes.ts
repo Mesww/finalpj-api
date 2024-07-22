@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import Activity from "../models/activity_model";
 import Station from "../models/station_model";
 import { getStations } from "../controllers/station_controllers";
+import { getPolylines } from "../controllers/polyline_controller";
 
 
 const router = express.Router();
@@ -42,6 +43,9 @@ router.get("/", async (req: Request, res: Response) => {
 
 // get station
 router.get('/getStation', getStations);
+
+// get polyline
+router.get('/getPolyline', getPolylines);
 
 
 
