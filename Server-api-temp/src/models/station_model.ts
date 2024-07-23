@@ -14,4 +14,4 @@ const StationSchema: Schema = new Schema({
   route: { type: String, required: true }
 });
 
-export default mongoose.model('Station', StationSchema);
+export default mongoose.model<Station>('Station', StationSchema);
